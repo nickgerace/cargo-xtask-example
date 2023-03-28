@@ -3,13 +3,15 @@ use std::env;
 use crate::task_harness::TaskHarness;
 use crate::{TaskError, TaskResult};
 
-const HELP_TEXT: &str = "Available tasks:
+const HELP_TEXT: &str = "
+Available Tasks:
   bloat          scan for potential bloat
   build          build all targets
   build-release  build all targets, scan and check binary size  
   ci             run the ci suite
   prepare        run update, and baseline lints and checks
-  scan           scan for vulnerabilities and unused dependencies";
+  scan           scan for vulnerabilities and unused dependencies
+";
 
 pub struct Cli;
 
@@ -22,7 +24,7 @@ impl Cli {
 
         let harness = TaskHarness::new()?;
 
-        match maybe_argument.as_ref().map(|argument| argument.as_str()) {
+        match maybe_argument.as_deref() {
             Some("bloat") => harness.task_bloat(),
             Some("build") => harness.task_build(),
             Some("build-release") => harness.task_build_release(),

@@ -27,7 +27,7 @@ impl TaskHarness {
         let mut cmd = Command::new("cargo");
         match cmd
             .current_dir(&self.root)
-            .args(args.trim().split(" "))
+            .args(args.trim().split(' '))
             .status()?
             .success()
         {
@@ -56,8 +56,8 @@ impl TaskHarness {
 
     pub fn task_ci(&self) -> TaskResult<()> {
         self.cargo("fmt --all -- --check")?;
-        self.cargo("check --all-targets --all-features")?;
-        self.cargo("clippy --all-targets --all-features --no-deps -- -D warnings")?;
+        self.cargo("check --all-targets --all-features --workspace")?;
+        self.cargo("clippy --all-targets --all-features --no-deps --workspace -- -D warnings")?;
         self.cargo("test -- --nocapture")?;
         Ok(())
     }
@@ -66,7 +66,7 @@ impl TaskHarness {
         self.cargo("update")?;
         self.cargo("fmt")?;
         self.cargo("fix --edition-idioms --allow-dirty --allow-staged")?;
-        self.cargo("clippy --all-features --all-targets --no-deps")
+        self.cargo("clippy --all-features --all-targets --no-deps --workspace")
     }
 
     pub fn task_scan(&self) -> TaskResult<()> {
