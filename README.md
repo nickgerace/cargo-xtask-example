@@ -15,7 +15,7 @@ cargo xtask
 ```
 
 A list of "tasks" should print alongside their descriptions.
-This command works via an alias in the repository's [cargo configuration file](.cargo/config).
+This command works via an alias in the repository's [cargo configuration file](.cargo/config.toml).
 The alias allows you to run tasks from any directory within the repository, like other command runners.
 
 ## Repository Structure
@@ -44,6 +44,10 @@ The latter represents the crate(s) that `xtask` would help orchestrate "tasks" f
     └── src
         └── main.rs
 ```
+
+> [!TIP]
+> Running `cargo run` will execute `your-crate` because it is the default crate in the root `Cargo.toml` file.
+> This means that running standard `cargo` commands will not require you to specify which crate you are targeting.
 
 ## Why `cargo xtask`?
 
