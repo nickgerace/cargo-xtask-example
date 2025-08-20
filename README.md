@@ -27,24 +27,22 @@ The latter represents the crate(s) that `xtask` would help orchestrate "tasks" f
 ```
 .
 ├── .cargo
-│   └── config
+│   └── config.toml
 │
 ├── Cargo.lock
 ├── Cargo.toml
 │
 ├── README.md
 │
-└── crates
-    │
-    ├── xtask
-    │   ├── Cargo.toml
-    │   └── src
-    │       └── main.rs
-    │
-    └── your-crate
-        ├── Cargo.toml
-        └── src
-    │       └── main.rs
+├── xtask
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+│
+└── your-crate
+    ├── Cargo.toml
+    └── src
+        └── main.rs
 ```
 
 ## Why `cargo xtask`?

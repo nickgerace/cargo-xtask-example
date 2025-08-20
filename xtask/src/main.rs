@@ -59,7 +59,7 @@ struct TaskRunner {
 
 impl TaskRunner {
     pub fn new() -> Result<Self> {
-        let root = match Path::new(CARGO_MANIFEST_DIR).ancestors().nth(2) {
+        let root = match Path::new(CARGO_MANIFEST_DIR).ancestors().nth(1) {
             Some(found_root) => found_root.to_path_buf(),
             None => return Err("could not determine repo root".into()),
         };
@@ -100,7 +100,7 @@ impl TaskRunner {
     #[allow(dead_code)]
     fn stderr(&self, contents: impl AsRef<str>) {
         let contents = contents.as_ref();
-        eprintln!("{PRINT_PREFIX} {contents}")
+        eprintln!("{PRINT_PREFIX} {contents}");
     }
 
     pub fn task_bloat(&self) -> Result<()> {
@@ -110,13 +110,11 @@ impl TaskRunner {
     }
 
     pub fn task_build(&self) -> Result<()> {
-        self.task_prepare()?;
         self.cargo("build --all-targets")?;
         Ok(())
     }
 
     pub fn task_build_release(&self) -> Result<()> {
-        self.task_prepare()?;
         self.task_scan()?;
         self.cargo("build --release")?;
         self.stdout(format!("binary size: {}", self.release_size()?));

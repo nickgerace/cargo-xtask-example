@@ -1,4 +1,4 @@
 [workspace]
 resolver = "3"
-members = ["crates/*"]
-default-members = ["crates/your-crate"]
+members = ["xtask", "your-crate"]
+default-members = ["your-crate"]
